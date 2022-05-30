@@ -1,7 +1,7 @@
 interface Contact extends Address {
     id: number;
     name: string;
-    birthDate?: Date;
+    birthDate?: Date;  // optional field with ?
 }
 
 interface Address {

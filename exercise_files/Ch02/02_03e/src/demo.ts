@@ -10,4 +10,4 @@ let primaryContact: Contact = {
     name: "Jamie Johnson",
 }
 
-type ContactName = string
+type ContactName = string   //it's just an alias but not a type himself

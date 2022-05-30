@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
-        "target": "ES6",
-        "outDir": "dist"
+        "target": "ES6", // the version of the js you want to target
+        "outDir": "dist" //the output path where the js files will be output to
     },
     "include": [
-        "**.ts"
+        "**.ts"  // define the input file path
     ]
 }
