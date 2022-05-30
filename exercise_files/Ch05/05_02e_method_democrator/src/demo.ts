@@ -13,6 +13,7 @@ const currentUser = {
     }
 }
 
+// method decorator
 function authorize(target: any, property: string, descriptor: PropertyDescriptor) {
     const wrapped = descriptor.value
 

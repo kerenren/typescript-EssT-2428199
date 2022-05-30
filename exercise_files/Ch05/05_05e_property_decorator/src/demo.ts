@@ -30,7 +30,47 @@ function authorize(role: string) {
     }
 }
 
+function freeze(constructor: Function) {
+    Object.freeze(constructor)
+    Object.freeze(constructor.prototype)
+}
+
+function singleton<T extends { new(...args: any[]): {} }>(constructor: T) {
+    return class Singleton extends constructor {
+        static _instance = null;
+
+        constructor(...args) {
+            super(...args);
+            if (Singleton._instance) {
+                throw Error("Duplicate instance")
+            }
+
+            Singleton._instance = this
+        }
+    }
+}
+
+// property decorator to make the property far more dynamic than just saving and retrieving values
+function auditable(target: object, key: string | symbol) {
+    // get the initial value, before the decorator is applied
+    let val = target[key];
+
+    // then overwrite the property with a custom getter and setter by using Object.defineProperty
+    Object.defineProperty(target, key, {
+        get: () => val,
+        set: (newVal) => {
+            console.log(`${key.toString()} changed: `, newVal);  // anytime the property value is changed, a new message is logged out
+            val = newVal;
+        },
+        enumerable: true,
+        configurable: true
+    })
+}
+
+@freeze
+@singleton
 class ContactRepository {
+    @auditable
     private contacts: Contact[] = [];
 
     @authorize("ContactViewer")

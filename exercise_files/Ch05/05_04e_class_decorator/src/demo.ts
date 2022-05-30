@@ -34,7 +34,9 @@ function freeze(constructor: Function) {
     Object.freeze(constructor)
     Object.freeze(constructor.prototype)
 }
-
+// dynamically redefine the new class decorator
+// fully implemented example of a class decorator
+// a generic type definition that describes the special behavior of a constructor function
 function singleton<T extends { new(...args: any[]): {} }>(constructor: T) {
     return class Singleton extends constructor {
         static _instance = null;
@@ -50,7 +52,7 @@ function singleton<T extends { new(...args: any[]): {} }>(constructor: T) {
     }
 }
 
-@freeze
+@freeze  // class decorator
 @singleton
 class ContactRepository {
     private contacts: Contact[] = [];
