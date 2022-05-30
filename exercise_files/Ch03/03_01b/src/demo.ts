@@ -1,6 +1,6 @@
 type ContactName = string;
 
-enum ContactStatus {
+enum ContactStatus { // define enum actually add more code
     Active = "active",
     Inactive = "inactive",
     New = "new"

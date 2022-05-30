@@ -1,13 +1,27 @@
+interface Contact {
+    name:string;
+    age: number;
+}
+
+
+interface Query<TProp> {
+    (val: TProp): boolean;
+}
+
+type ContactQuery ={
+    [TProp in keyof Contact]?: Query<Contact[TProp]>
+}
+
 function query<T>(
     items: T[],
-    query: any // <--- replace this!
+    query: ContactQuery // <--- replace any with ContactQuery type
 ) {
     return items.filter(item => {
         // iterate through each of the item's properties
-        for (const property of Object.keys(item)) {
+        for (const property of Object.keys(item) as (keyof Contact)[]) {
 
             // get the query for this property name
-            const propertyQuery = query[property]
+            const propertyQuery = query[property] as Query<Contact[keyof Contact]>
 
             // see if this property value matches the query
             if (propertyQuery && propertyQuery(item[property])) {
@@ -19,6 +33,7 @@ function query<T>(
         return false
     })
 }
+
 
 const matches = query(
     [

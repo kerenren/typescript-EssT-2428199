@@ -13,7 +13,7 @@ interface Contact {
     address: Address;
 }
 
-type Awesome = Contact["address"]["postalCode"]
+type Awesome = Contact["address"]["postalCode"]  //access the nested property
 
 interface ContactEvent {
     contactId: Contact["id"];
@@ -27,11 +27,15 @@ interface ContactStatusChangedEvent extends ContactEvent {
     newStatus: Contact["status"];
 }
 
+interface anotherContactFields {
+    statusChanged: boolean
+}
 interface ContactEvents {
     deleted: ContactDeletedEvent;
     statusChanged: ContactStatusChangedEvent;
     // ... and so on
 }
+
 
 function getValue<T, U extends keyof T>(source: T, propertyName: U) {
     return source[propertyName];
@@ -46,4 +50,4 @@ function handleEvent<T extends keyof ContactEvents>(
     }
 }
 
-handleEvent("statusChanged", evt => evt)
+handleEvent("statusChanged", evt => evt) // index access figured out evt: ContactStatusChangedEvent

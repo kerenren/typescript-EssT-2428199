@@ -24,6 +24,8 @@ interface Query<TProp> {
 type ContactQuery = {
     [TProp in keyof Contact]?: Query<Contact[TProp]>
 }
+// a mapped type definition uses a property indexer syntax
+// able to reference the types of the property as well
 
 function searchContacts(contacts: Contact[], query: ContactQuery) {
     return contacts.filter(contact => {

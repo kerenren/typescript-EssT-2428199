@@ -1,4 +1,7 @@
 let x: Record<string, string | number | boolean | Function> = { name: "Wruce Bayne" }
+// Record<Keys, Type>
+// Constructs an object type whose property keys are Keys and whose property values are Type.
+// This utility can be used to map the properties of a type to another type.
 x.number = 1234
 x.active = true
 x.log = () => console.log("awesome!")
@@ -28,7 +31,10 @@ interface Query {
 
 function searchContacts(contacts: Contact[], query: Record<keyof Contact, Query>) {
     return contacts.filter(contact => {
-        for (const property of Object.keys(contact) as (keyof Contact)[]) {
+        for (const property of Object.keys(contact) as (keyof Contact)[]) {  // to cast the call to object keys to the same type
+            // as keyword tells the compiler to consider the typed object as a plain untyped JavaScript object.
+            // https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions
+
             // get the query object for this property
             const propertyQuery = query[property];
             // check to see if it matches

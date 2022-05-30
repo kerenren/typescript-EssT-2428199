@@ -35,7 +35,8 @@ function toContact(nameOrContact: string | Contact): Contact {
 
 const myType = { min: 1, max: 200 }
 
-function save(source: typeof myType) {}
+function save(source: typeof myType) {}  // using the 03_03e_typeof operator is a helpful shortcut.
+//it can be useful when accepting value of types that you don't know about until run time.
 
 
 

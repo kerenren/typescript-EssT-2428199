@@ -1,8 +1,8 @@
 type ContactName = string;
 
-type ContactStatus = "active" | "inactive" | "new"
+type ContactStatus = "active" | "inactive" | "new"  //rewrite enum with type alias syntax to restrain certain values
 
-type ContactBirthDate = Date | number | string
+type ContactBirthDate = Date | number | string // multiple types with type alias syntax
 
 interface Contact  {
     id: number;
@@ -19,7 +19,7 @@ interface Address {
     postalCode: string;
 }
 
-type AddressableContact = Contact & Address
+type AddressableContact = Contact & Address // it's similar to interface AddressableContact extends Contact, Address {}
 
 function getBirthDate(contact: Contact) {
     if (typeof contact.birthDate === "number") {

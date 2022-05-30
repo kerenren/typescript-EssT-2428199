@@ -28,13 +28,22 @@ interface Query {
 }
 
 type ContactQuery = 
-    Partial<
-        Pick<
-            Record<keyof Contact, Query>,
-            "id" | "name"
+    Omit<
+        Partial<
+            Pick<
+                Record<keyof Contact, Query>,
+                "id" | "name"
+                >
+            >,
+        "address"
         >
-    >
+// Record<Keys, Type> constructs an object type whose property keys are Keys and whose property values are Type.
 
+// Omit<Type, Keys> constructs a type by picking all properties from Type and then removing Keys (string literal or union of string literals)
+// Pick<Type, Keys> constructs a type by picking the set of properties Keys (string literal or union of string literals) from Type.
+
+// Partial<Type> constructs a type with all properties of Type set to optional.The opposite of Required.
+// Required<Type> constructs a type consisting of all properties of Type set to required. The opposite of Partial.
 type RequiredContactQuery = Required<ContactQuery>
 
 function searchContacts(contacts: Contact[], query: ContactQuery) {
