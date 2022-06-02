@@ -2,7 +2,7 @@
     "compilerOptions": {
         "target": "esnext",
         "outDir": "dist",
-        "module": "CommonJS"
+        "module": "CommonJS"  // the type of module system that node uses
     },
     "include": [
         "src/**/*"
